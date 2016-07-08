@@ -6,9 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import me.academeg.androidmvp.R;
+import me.academeg.androidmvp.api.dataSet.Joke;
 
 public class JokesAdapter extends RecyclerView.Adapter<JokesAdapter.ViewHolder> {
+
+    private List<Joke> dataSet;
+
+    public void setDataSet(List<Joke> dataSet) {
+        this.dataSet = dataSet;
+        notifyDataSetChanged();
+    }
+
+    public Joke getItem(int position) {
+        return dataSet.get(position);
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
@@ -17,12 +32,12 @@ public class JokesAdapter extends RecyclerView.Adapter<JokesAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textTV.setText(String.format("Some text %d", position));
+        holder.textTV.setText(dataSet.get(position).getJoke());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return dataSet != null ? dataSet.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
