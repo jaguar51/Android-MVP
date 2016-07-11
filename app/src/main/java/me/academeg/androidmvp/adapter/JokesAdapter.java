@@ -15,13 +15,29 @@ public class JokesAdapter extends RecyclerView.Adapter<JokesAdapter.ViewHolder> 
 
     private List<Joke> dataSet;
 
-    public void setDataSet(List<Joke> dataSet) {
-        this.dataSet = dataSet;
+    public JokesAdapter() {
+    }
+
+    public void addDataSet(List<Joke> dataSet) {
+        if (this.dataSet == null) {
+            this.dataSet = dataSet;
+        } else {
+            this.dataSet.addAll(dataSet);
+        }
         notifyDataSetChanged();
     }
 
     public Joke getItem(int position) {
         return dataSet.get(position);
+    }
+
+    public List<Joke> getDataSet() {
+        return dataSet;
+    }
+
+    public void setDataSet(List<Joke> dataSet) {
+        this.dataSet = dataSet;
+        notifyDataSetChanged();
     }
 
     @Override

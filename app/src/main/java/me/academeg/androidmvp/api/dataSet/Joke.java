@@ -4,9 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Joke {
+public class Joke implements Serializable {
 
     private int id;
     private String joke;
