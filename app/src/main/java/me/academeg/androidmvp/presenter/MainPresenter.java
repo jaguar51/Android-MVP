@@ -3,7 +3,6 @@ package me.academeg.androidmvp.presenter;
 import android.os.Handler;
 import android.os.Looper;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import me.academeg.androidmvp.api.dao.JokeDao;
@@ -12,7 +11,7 @@ import me.academeg.androidmvp.api.exception.InternetException;
 import me.academeg.androidmvp.presenter.base.BasePresenter;
 import me.academeg.androidmvp.ui.MainActivity;
 
-public class MainPresenter extends BasePresenter<MainActivity> implements Serializable {
+public class MainPresenter extends BasePresenter<MainActivity> {
 
     private MainActivity mainActivity;
     private boolean isLoadingData = false;

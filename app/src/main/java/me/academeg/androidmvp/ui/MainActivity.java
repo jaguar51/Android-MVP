@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
+import me.academeg.androidmvp.PresenterManager;
 import me.academeg.androidmvp.R;
 import me.academeg.androidmvp.adapter.JokesAdapter;
 import me.academeg.androidmvp.api.dataSet.Joke;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("main_presenter", mainPresenter);
+        PresenterManager.getInstance().savePresenter(mainPresenter, outState);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void instantiatePresenter(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            mainPresenter = (MainPresenter) savedInstanceState.getSerializable("main_presenter");
+            mainPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
         if (mainPresenter == null) {
             mainPresenter = new MainPresenter(this);
