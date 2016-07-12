@@ -5,6 +5,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -14,9 +16,12 @@ import me.academeg.androidmvp.adapter.JokesAdapter;
 import me.academeg.androidmvp.api.dataSet.Joke;
 import me.academeg.androidmvp.presenter.MainPresenter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout refreshLayout;
+    private ProgressBar progressBar;
+
     private JokesAdapter adapter;
     private MainPresenter mainPresenter;
 
@@ -31,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        refreshLayout.setEnabled(false);
+        refreshLayout.setOnRefreshListener(this);
+
+        progressBar = (ProgressBar) findViewById(R.id.pb_progress);
 
         instantiatePresenter(savedInstanceState);
     }
@@ -55,12 +62,17 @@ public class MainActivity extends AppCompatActivity {
         mainPresenter.detachView();
     }
 
+    @Override
+    public void onRefresh() {
+        mainPresenter.getJokes();
+    }
+
     private void instantiatePresenter(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             mainPresenter = PresenterManager.getInstance().restorePresenter(savedInstanceState);
         }
         if (mainPresenter == null) {
-            mainPresenter = new MainPresenter(this);
+            mainPresenter = new MainPresenter();
         }
     }
 
@@ -70,5 +82,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void setJokesToList(List<Joke> dataSet) {
         adapter.setDataSet(dataSet);
+    }
+
+    public void showProgressBar(boolean isShow) {
+        progressBar.setVisibility(isShow ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    public void hideRefresher() {
+        refreshLayout.setRefreshing(false);
+    }
+
+    public void showRefresher() {
+        refreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(true);
+            }
+        });
     }
 }

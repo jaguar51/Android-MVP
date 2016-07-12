@@ -13,43 +13,55 @@ import me.academeg.androidmvp.ui.MainActivity;
 
 public class MainPresenter extends BasePresenter<MainActivity> {
 
-    private MainActivity mainActivity;
     private boolean isLoadingData = false;
+    private boolean isFirstLoading = false;
     private ArrayList<Joke> jokesCache;
 
-    public MainPresenter(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    public MainPresenter() {
+    }
+
+    @Override
+    public void onStart() {
+        getView().setJokesToList(jokesCache);
+        if (isLoadingData) {
+            getView().showProgressBar(true);
+        }
+        if (isFirstLoading) {
+            getView().showRefresher();
+        }
+        if (!isFirstLoading && !isLoadingData && jokesCache == null) {
+            getJokes();
+        }
     }
 
     public void getJokes() {
-        isLoadingData = true;
+        getView().showRefresher();
+        isFirstLoading = true;
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    final ArrayList<Joke> randomJokes = new JokeDao().getRandomJokes(5);
-                    jokesCache = randomJokes;
+                    jokesCache = new JokeDao().getRandomJokes(5);
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            mainActivity.addJokesToList(randomJokes);
+                            if (isViewAttach()) {
+                                getView().setJokesToList(jokesCache);
+                                getView().showProgressBar(false);
+                                getView().hideRefresher();
+                                isFirstLoading = false;
+                            }
                         }
                     });
                 } catch (InternetException e) {
                     e.printStackTrace();
-                } finally {
-                    isLoadingData = false;
                 }
             }
         }).start();
     }
 
-    @Override
-    public void onStart() {
-        if (!isLoadingData && jokesCache != null) {
-            getView().setJokesToList(jokesCache);
-        } else {
-            getJokes();
-        }
+    public void getNextJokes() {
+
     }
 }
