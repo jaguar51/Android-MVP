@@ -1,6 +1,7 @@
 package me.academeg.androidmvp.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,7 @@ public class JokesAdapter extends RecyclerView.Adapter<JokesAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textTV.setText(dataSet.get(position).getJoke());
+        holder.textTV.setText(Html.fromHtml(dataSet.get(position).getJoke()));
     }
 
     @Override
