@@ -1,4 +1,4 @@
-package me.academeg.androidmvp.api.dataSet;
+package me.academeg.androidmvp.api.methods;
 
 import org.json.JSONArray;
 import org.json.JSONException;

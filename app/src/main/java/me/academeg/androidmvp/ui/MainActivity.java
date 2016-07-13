@@ -13,7 +13,7 @@ import java.util.List;
 import me.academeg.androidmvp.PresenterManager;
 import me.academeg.androidmvp.R;
 import me.academeg.androidmvp.adapter.JokesAdapter;
-import me.academeg.androidmvp.api.dataSet.Joke;
+import me.academeg.androidmvp.api.methods.Joke;
 import me.academeg.androidmvp.presenter.MainPresenter;
 
 public class MainActivity extends AppCompatActivity
