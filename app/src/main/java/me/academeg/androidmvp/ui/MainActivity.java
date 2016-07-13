@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new JokesAdapter();
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration());
 
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         refreshLayout.setOnRefreshListener(this);
