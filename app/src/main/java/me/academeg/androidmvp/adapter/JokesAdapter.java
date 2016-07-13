@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import me.academeg.androidmvp.R;
-import me.academeg.androidmvp.api.methods.Joke;
+import me.academeg.androidmvp.api.model.Joke;
 
 public class JokesAdapter extends RecyclerView.Adapter<JokesAdapter.ViewHolder> {
 

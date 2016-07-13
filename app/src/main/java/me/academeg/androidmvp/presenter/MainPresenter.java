@@ -3,8 +3,8 @@ package me.academeg.androidmvp.presenter;
 import java.util.List;
 
 import me.academeg.androidmvp.api.ApiCallback;
-import me.academeg.androidmvp.api.model.JokeDao;
-import me.academeg.androidmvp.api.methods.Joke;
+import me.academeg.androidmvp.api.methods.JokeDao;
+import me.academeg.androidmvp.api.model.Joke;
 import me.academeg.androidmvp.presenter.base.BasePresenter;
 import me.academeg.androidmvp.ui.MainActivity;
 

@@ -1,4 +1,4 @@
-package me.academeg.androidmvp.api.model;
+package me.academeg.androidmvp.api.methods;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.academeg.androidmvp.api.ApiCallback;
-import me.academeg.androidmvp.api.methods.Joke;
+import me.academeg.androidmvp.api.model.Joke;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;

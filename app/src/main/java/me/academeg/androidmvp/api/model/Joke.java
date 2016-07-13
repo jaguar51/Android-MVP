@@ -1,4 +1,4 @@
-package me.academeg.androidmvp.api.methods;
+package me.academeg.androidmvp.api.model;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.Arrays;
 
+@SuppressWarnings("unused")
 public class Joke implements Serializable {
 
     private int id;
