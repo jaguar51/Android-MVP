@@ -1,4 +1,4 @@
-package me.academeg.androidmvp.ui;
+package me.academeg.androidmvp.ui.component;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

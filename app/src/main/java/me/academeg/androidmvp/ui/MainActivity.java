@@ -15,6 +15,8 @@ import me.academeg.androidmvp.R;
 import me.academeg.androidmvp.adapter.JokesAdapter;
 import me.academeg.androidmvp.api.model.Joke;
 import me.academeg.androidmvp.presenter.MainPresenter;
+import me.academeg.androidmvp.ui.component.EndlessRecyclerOnScrollListener;
+import me.academeg.androidmvp.ui.component.SimpleDividerItemDecoration;
 
 public class MainActivity extends AppCompatActivity
         implements SwipeRefreshLayout.OnRefreshListener {
@@ -31,10 +33,17 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         adapter = new JokesAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration());
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int itemCount) {
+                mainPresenter.getNextJokes();
+            }
+        });
 
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         refreshLayout.setOnRefreshListener(this);

@@ -49,7 +49,7 @@ public class JokesAdapter extends RecyclerView.Adapter<JokesAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textTV.setText(Html.fromHtml(dataSet.get(position).getJoke()));
+        holder.textTV.setText(Html.fromHtml(position + " " + dataSet.get(position).getJoke()));
     }
 
     @Override

@@ -51,6 +51,19 @@ public class MainPresenter extends BasePresenter<MainActivity> {
     }
 
     public void getNextJokes() {
+        isLoadingData = true;
+        JokeDao jokeDao = new JokeDao();
+        jokeDao.getRandomJokes(5, new ApiCallback<List<Joke>>() {
+            @Override
+            public void onResult(List<Joke> res) {
+                jokesCache.addAll(res);
+                getView().setJokesToList(jokesCache);
+                isLoadingData = false;
+            }
 
+            @Override
+            public void onError() {
+            }
+        });
     }
 }
